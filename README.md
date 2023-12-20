@@ -1,2 +1,2 @@
 # JavaScript
- all my lessons of JavaScript
+ all of my projects and lessons in JavaScript
