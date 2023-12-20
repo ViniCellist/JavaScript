@@ -5,6 +5,10 @@ const ulTask = document.querySelector('.app__section-task-list')
 
 const tasks = JSON.parse(localStorage.getItem('tasks')) || []
 
+function updateTask() {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+}
+
 function createElementTask(task) {
     const li = document.createElement('li')
     li.classList.add('app__section-task-list-item')
@@ -23,6 +27,13 @@ function createElementTask(task) {
 
     const btn = document.createElement('button')
     btn.classList.add('app_button-edit')
+
+    btn.onclick = () => {
+        const newDescription = prompt("Qual é o novo nome da tarefa?")
+        paragraph.textContent = newDescription
+        task.descriptionTask = newDescription
+        updateTask()
+    }
 
     const btnImage = document.createElement('img')
     btnImage.setAttribute('src', 'imagens/edit.png')
@@ -47,7 +58,7 @@ formAddTask.addEventListener('submit', (event) => {
     tasks.push(task)
     const elementTask = createElementTask(task)
     ulTask.append(elementTask)
-    localStorage.setItem('tasks', JSON.stringify(tasks))
+    updateTask()
     textArea.value = ''
     formAddTask.classList.add('hidden')
 })
