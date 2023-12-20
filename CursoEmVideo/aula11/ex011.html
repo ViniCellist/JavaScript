@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nacionalidades</title>
+    <style>
+        body {
+            background: rgb(224, 120, 120);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Qual país você nasceu?</h1>
+    <input type="text" name="txtt" id="txtt">
+    <input type="button" value="confirmar" onclick="verify()">
+    <div id="res"></div>
+
+    <script>
+        function verify() {
+            var pais = window.document.querySelector('input#txtt').value
+            var res = window.document.querySelector('div#res')
+            
+            if(pais === 'Brasil') {
+                res.innerHTML = 'Você é brasileiro!'
+            } else {
+                res.innerHTML = `Estrangeiro`
+            }
+        }
+    </script>
+</body>
+</html>
