@@ -1,11 +1,16 @@
 const taskListContainer = document.querySelector('.app__section-task-list')
+
 const formTask = document.querySelector('.app__form-add-task')
 const toggleFormTaskBtn = document.querySelector('.app__button--add-task')
 const formLabel = document.querySelector('.app__form-label')
-const textArea = document.querySelector('.app__form-textarea')
+
 const cancelFormTaskBtn = document.querySelector('.app__form-footer__button--cancel')
-const btnCancel = document.querySelector('.app__form-footer__button--cancel')
+
 const taskActiveDescription = document.querySelector('.app__section-active-task-description')
+
+const textArea = document.querySelector('.app__form-textarea')
+
+const btnCancel = document.querySelector('.app__form-footer__button--cancel')
 
 const localStorageTask = localStorage.getItem('tasks')
 let tasks = localStorageTask ? JSON.parse(localStorageTask) : []
@@ -22,6 +27,9 @@ const taskIconSvg = `
 
 let selectedTask = null
 let selectedItemTask = null
+
+let editTask = null
+let paragraphEdit = null
 
 const selectTask = (task, element) => {
     document.querySelectorAll('.app__section-task-list-item-active').forEach(function (button) { 
@@ -41,8 +49,22 @@ const selectTask = (task, element) => {
 }
 
 const cleanForm = () => {
+    taskInEdit = null
+    paragraphEdit = null
     textArea.value = ''
     formTask.classList.add('hidden')
+}
+
+const selectTaskToEdit = (task, element) => {
+    if (taskInEdit == task) {
+        cleanForm()
+        return
+    }
+    formLabel.textContent = 'Editando Tarefa'
+    taskInEdit = element
+    paragraphEdit = element
+    textArea.value = task.description
+    formTask.classList.remove('hidden')
 }
 
 function createTask(task) {
@@ -54,15 +76,27 @@ function createTask(task) {
 
     const paragraph = document.createElement('p')
     paragraph.classList.add('app__section-task-list-item-description')
+
     paragraph.textContent = task.description
 
     const button = document.createElement('button')
+
+    button.classList.add('app_button-edit')
+    const editIcon = document.createElement('img')
+    editIcon.setAttribute('src', 'imagens/edit.png')
+
+    li.appendChild(editIcon)
+
+    button.addEventListener('click', (event) => {
+        event.stopPropagation()
+        selectTaskToEdit(task, paragraph)
+    })
 
     li.onclick = () => {
         selectTask(task, li)
     }
 
-    svgIcon.addEventListener('click', (event) => {
+    svgIcon.addEventListener('click', (event) =>    {
         event.stopPropagation()
         button.setAttribute('disabled', true)
         li.classList.add('app__section-task-list-item-complete')
@@ -75,7 +109,8 @@ function createTask(task) {
 
     li.appendChild(svgIcon)
     li.appendChild(paragraph)
-
+    li.appendChild(button)
+    
     return li
 }
 
@@ -83,6 +118,12 @@ tasks.forEach(task => {
     const taskItem = createTask(task)
     taskListContainer.appendChild(taskItem)
 })
+
+cancelFormTaskBtn.addEventListener('click', () => {
+    formTask.classList.add('hidden')
+})
+
+btnCancel.addEventListener('click', cleanForm)
 
 toggleFormTaskBtn.addEventListener('click', () => {
     formLabel.textContent = 'Adicionando tarefa'
@@ -95,19 +136,19 @@ const updateLocalStorage = () => {
 
 formTask.addEventListener('submit', (event) => {
     event.preventDefault()
-    const task = {
-        description: textArea.value,
-        completed: false
+    if (taskInEdit) {
+        taskInEdit.description = textArea.value
+        paragraphEdit.textContent = textArea.value
+    } else {
+        const task = {
+            description: textArea.value,
+            completed: false
+    }
     }
     tasks.push(task)
     const taskItem = createTask(task)
     taskListContainer.appendChild(taskItem)
+    
     updateLocalStorage()
     cleanForm()
 })
-
-cancelFormTaskBtn.addEventListener('click', () => {
-    formTask.classList.add('hidden')
-})
-
-btnCancel.addEventListener('click', cleanForm)
