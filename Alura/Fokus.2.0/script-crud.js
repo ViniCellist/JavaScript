@@ -32,6 +32,7 @@ let editTask = null
 let paragraphEdit = null
 
 const selectTask = (task, element) => {
+
     document.querySelectorAll('.app__section-task-list-item-active').forEach(function (button) { 
         button.classList.remove('app__section-task-list-item-active')
     })
@@ -42,6 +43,7 @@ const selectTask = (task, element) => {
         selectedTask = null
         return
     }
+
     selectedTask = task
     selectedItemTask = element
     taskActiveDescription.textContent = task.description
@@ -60,6 +62,7 @@ const selectTaskToEdit = (task, element) => {
         cleanForm()
         return
     }
+
     formLabel.textContent = 'Editando Tarefa'
     taskInEdit = element
     paragraphEdit = element
@@ -85,7 +88,7 @@ function createTask(task) {
     const editIcon = document.createElement('img')
     editIcon.setAttribute('src', 'imagens/edit.png')
 
-    li.appendChild(editIcon)
+    button.appendChild(editIcon)
 
     button.addEventListener('click', (event) => {
         event.stopPropagation()
@@ -144,11 +147,11 @@ formTask.addEventListener('submit', (event) => {
             description: textArea.value,
             completed: false
     }
-    }
+    
     tasks.push(task)
     const taskItem = createTask(task)
     taskListContainer.appendChild(taskItem)
-    
+}
     updateLocalStorage()
     cleanForm()
 })
