@@ -12,6 +12,11 @@ const textArea = document.querySelector('.app__form-textarea')
 
 const btnCancel = document.querySelector('.app__form-footer__button--cancel')
 
+const btnDell = document.querySelector('.app__form-footer__button--delete')
+
+const btnDeleteCompleted = document.querySelector('#btn-remover-concluidas')
+const btnDeleteAll = document.querySelector('#btn-remover-todas')
+
 const localStorageTask = localStorage.getItem('tasks')
 let tasks = localStorageTask ? JSON.parse(localStorageTask) : []
 
@@ -31,7 +36,20 @@ let selectedItemTask = null
 let editTask = null
 let paragraphEdit = null
 
+const removeTasks = (onlyCompleted) => {
+    const selector = onlyCompleted ? '.app__section-task-list-item-complete' : '.app__section-task-list-item'
+    document.querySelectorAll(selector).forEach((element) => {
+        element.remove()
+    })
+
+    tasks = onlyCompleted ? tasks.filter(t => !t.completed) : []
+    updateLocalStorage()
+}
+
 const selectTask = (task, element) => {
+    if (task.completed){
+        return
+    }
 
     document.querySelectorAll('.app__section-task-list-item-active').forEach(function (button) { 
         button.classList.remove('app__section-task-list-item-active')
@@ -64,7 +82,7 @@ const selectTaskToEdit = (task, element) => {
     }
 
     formLabel.textContent = 'Editando Tarefa'
-    taskInEdit = element
+    taskInEdit = task
     paragraphEdit = element
     textArea.value = task.description
     formTask.classList.remove('hidden')
@@ -100,9 +118,13 @@ function createTask(task) {
     }
 
     svgIcon.addEventListener('click', (event) =>    {
-        event.stopPropagation()
-        button.setAttribute('disabled', true)
-        li.classList.add('app__section-task-list-item-complete')
+        if (task == selectedTask) {
+            event.stopPropagation()
+            button.setAttribute('disabled', true)
+            li.classList.add('app__section-task-list-item-complete')
+            selectedTask.completed = true
+            updateLocalStorage()
+        }
     })
 
     if (task.completed){
@@ -133,6 +155,23 @@ toggleFormTaskBtn.addEventListener('click', () => {
     formTask.classList.toggle('hidden')
 })
 
+btnDell.addEventListener('click', () => {
+    if (selectedTask) {
+        const index = tasks.indexOf(selectedTask)
+        if (index !== -1) {
+            tasks.splice(index, 1)
+        }
+    
+        selectedItemTask.remove()
+        task.filter(t=> t != selectedTask)
+        selectedItemTask = null
+        selectedTask = null
+    }
+
+    updateLocalStorage()
+    cleanForm()
+})
+
 const updateLocalStorage = () => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
 }
@@ -146,12 +185,23 @@ formTask.addEventListener('submit', (event) => {
         const task = {
             description: textArea.value,
             completed: false
+        }   
+        tasks.push(task)
+        const taskItem = createTask(task)
+        taskListContainer.appendChild(taskItem)
     }
-    
-    tasks.push(task)
-    const taskItem = createTask(task)
-    taskListContainer.appendChild(taskItem)
-}
-    updateLocalStorage()
-    cleanForm()
+        updateLocalStorage()
+        cleanForm()
+})
+
+btnDeleteCompleted.addEventListener('click', () => removeTasks(true))
+btnDeleteAll.addEventListener('click', () => removeTasks(false))
+
+document.addEventListener('TarefaFinalizada', function (e) {
+    if (selectedTask) {
+        selectedTask.completed = true
+        selectedItemTask.classList.add('app__section-task-list-item-complete')
+        selectedItemTask.querySelector('button').setAttribute('disabled', true)
+        updateLocalStorage()
+    }
 })
