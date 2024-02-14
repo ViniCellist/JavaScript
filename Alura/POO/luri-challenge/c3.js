@@ -19,5 +19,5 @@ teste2.idade = 19;
 teste2.aniversario();
 
 
-console.log(teste2);
+console.log(teste1);
 
