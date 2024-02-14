@@ -1,1 +1,1 @@
-window.document.querySelector('.tel')
+window.document.querySelector('.tel');
