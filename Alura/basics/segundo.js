@@ -1,6 +1,6 @@
-console.log("Olá")
+console.log("Olá");
 //JS é case sensitive
 
-idade = 29
+idade = 29;
 
-console.log(Idade)
+console.log(Idade);
