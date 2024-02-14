@@ -1,4 +1,4 @@
-console.log("trabalhando com listas")
+console.log("trabalhando com listas");
 /*
 const salvador = `Salvador`
 const saoPaulo = `São Paulo`
@@ -8,10 +8,10 @@ const listaDeDestinos = new Array(
     `Salvador`,
     `São Paulo`,
     `Rio de Janeiro`
-)
+);
 
-listaDeDestinos.push(`Curitiba`)
+listaDeDestinos.push(`Curitiba`);
 
 
-console.log("Destino possiveis: ")
-console.log(listaDeDestinos)
+console.log("Destino possiveis: ");
+console.log(listaDeDestinos);
