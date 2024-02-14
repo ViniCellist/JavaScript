@@ -1,6 +1,6 @@
-var pais = 'Angola'
+var pais = 'Angola';
 if (pais == 'Brasil') {
-    console.log('Brasileiro!')
+    console.log('Brasileiro!');
 } else {
-    console.log('Estrangeiro!')
-}
+    console.log('Estrangeiro!');
+};
