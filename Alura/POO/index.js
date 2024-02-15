@@ -24,5 +24,4 @@ teste2.cliente = client2;
 teste1.transferir(250, teste2);
 
 /**/
-console.log(teste2);
-console.log(teste1);
+console.log(teste2.saldo);
