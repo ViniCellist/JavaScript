@@ -1,8 +1,25 @@
+import { Client } from "./Client.js";
+
 export class ChainAccount {
     agencia;
-    cliente;
+    _cliente;
+
+    set cliente(novoValor) {
+        if(novoValor instanceof Client) {
+            this._cliente = novoValor;
+        };
+    };
+
+    get cliente() {
+        return this._cliente;
+    };
+
     /*privado*/ 
     _saldo = 0;
+
+    get saldo() {
+        return this._saldo;
+    };
 
     sacar(valor) {
         if(this._saldo >= valor) {
