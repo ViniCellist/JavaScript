@@ -1,8 +1,11 @@
 import { Client } from "./Client.js";
 
 export class ChainAccount {
+    static numContas = 0;
     agencia;
     _cliente;
+    /*privado*/ 
+    _saldo = 0;
 
     set cliente(novoValor) {
         if(novoValor instanceof Client) {
@@ -14,11 +17,14 @@ export class ChainAccount {
         return this._cliente;
     };
 
-    /*privado*/ 
-    _saldo = 0;
-
     get saldo() {
         return this._saldo;
+    };
+
+    constructor(agencia, cliente) {
+        this.agencia = agencia;
+        this.cliente = cliente;
+        ChainAccount.numContas += 1;
     };
 
     sacar(valor) {
