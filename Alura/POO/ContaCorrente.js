@@ -25,6 +25,7 @@ export class ContaCorrente {
     };
 
     sacar(valor) {
+        taxa = 1.1 * valor;
         if(this._saldo >= valor) {
             this._saldo -= valor;
             return valor;
