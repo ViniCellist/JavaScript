@@ -11,9 +11,7 @@ const contaP = new ContaPoupanca(1000, 1001, cliente1);
 contaC.depositar(1000)
 contaC.sacar(100)
 
-contaP.sacar(10)
 
-
-console.log(contaP);
+console.log(contaC);
 
 
