@@ -1,10 +1,10 @@
-import { Client } from "./Client.js";
-import { ChainAccount } from "./Chain.js";
+import { Cliente } from "./Cliente.js";
+import { ContaCorrente } from "./ContaCorrente.js";
 
-const client1 = new Client("Fulano", 11122233309);
-const teste1 = new ChainAccount(1001, client1);
+const cliente1 = new Cliente("Fulano", 11122233309);
+const teste1 = new ContaCorrente(1001, cliente1);
 
-const client2 = new Client("Ciclano", 77788899901);
-const teste2 = new ChainAccount(1001, client2);
+const cliente2 = new Cliente("Ciclano", 77788899901);
+const teste2 = new ContaCorrente(1001, cliente2);
 
 console.log(ChainAccount.numContas);
