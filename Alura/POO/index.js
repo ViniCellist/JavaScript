@@ -6,6 +6,14 @@ const cliente1 = new Cliente("Fulano", 11122233309);
 const contaC = new ContaCorrente(1001, cliente1);
 const contaP = new ContaPoupanca(1000, 1001, cliente1);
 
-console.log(contaC);
+
+/*testes*/
+contaC.depositar(1000)
+contaC.sacar(100)
+
+contaP.sacar(10)
+
+
 console.log(contaP);
+
 
