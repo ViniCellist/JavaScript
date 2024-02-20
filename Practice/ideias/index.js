@@ -4,7 +4,7 @@ import { Cozinha } from "./Cozinha.js";
 import { Quarto } from "./Quarto.js";
 import { Sala } from "./Sala.js";
 
-const sala = new Sala("Samsung", "Reatratil", "Retratil", "Vidro", "Felpudo");
+const sala = new Sala("Samsung", "Retratil", "Retratil", "Vidro", "Felpudo");
 const quarto = new Quarto("King-size", "Closet imbutido", "Rocketz", "Gamer", "Gamer");
 const banheiro = new Banheiro("Porcelana", "Porcelana", "Vidro", "Lorenzetti");
 const cozinha = new Cozinha("Dako", "Brastemp", "Marmore", "Estofada", "Eletrolux", "Madeira");
