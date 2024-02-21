@@ -7,11 +7,9 @@ const contaC = new ContaCorrente(1001, cliente1);
 const contaP = new ContaPoupanca(1000, 1001, cliente1);
 
 
+
 /*testes*/
-contaC.depositar(1000)
-contaC.sacar(100)
 
-
-console.log(contaC);
+console.error(contaC, contaP);
 
 
