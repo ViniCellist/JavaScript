@@ -1,6 +1,6 @@
 import { handleStatus } from "../utils/promise-helpers.js";
 import { partialize } from "../utils/operators.js";
-import { compose } from "../utils/operators.js";
+import { pipe, compose } from "../utils/operators.js";
 
 const API = 'http://localhost:3000/notas';
 
