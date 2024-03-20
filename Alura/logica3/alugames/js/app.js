@@ -2,7 +2,7 @@ const btns = document.querySelectorAll('.dashboard__item__button');
 const img = document.querySelectorAll('.dashboard__item__img');
 
 btns.forEach((e) => {
-    e.addEventListener('click', changeStatus, changeImg);
+    e.addEventListener('click', changeStatus);
 });
 
 function changeStatus() {
