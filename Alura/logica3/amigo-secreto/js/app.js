@@ -10,6 +10,15 @@ btnReset.addEventListener('click', reiniciar);
 
 function adicionar() {
     let amigo = document.querySelector('#nome-amigo');
+    if (amigo.value == '') {
+        alert('Informe o nome do amigo');
+        return;
+    };
+
+    if (amigos.includes(amigo.value)) {
+        alert('Nome já informado!!');
+        return;
+    }
     let lista = document.querySelector('#lista-amigos');
     amigos.push(amigo.value);
 
@@ -23,6 +32,10 @@ function adicionar() {
 }
 
 function sortear() {
+    if (amigos.length < 4) {
+        alert('adiciona pelo menos 4 amigos');
+        return;
+    };
     embaralha(amigos);
     let sorteio = document.querySelector('#lista-sorteio');
 
